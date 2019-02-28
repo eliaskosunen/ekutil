@@ -441,13 +441,13 @@ namespace ekutil {
             }
 
             stack_storage s;
-            this->uninitialized_move(begin(), end(), s.get_data());
+            ekutil::uninitialized_move(begin(), end(), s.get_data());
             s.size = size();
 
             _destruct();
             _construct_stack_storage();
-            this->uninitialized_move(s.get_data(), s.get_data() + s.size,
-                                     _get_stack().get_data());
+            ekutil::uninitialized_move(s.get_data(), s.get_data() + s.size,
+                                       _get_stack().get_data());
             _set_size(s.size);
 
             for (size_t i = 0; i != s.size; ++i) {
@@ -608,7 +608,7 @@ namespace ekutil {
             auto storage_ptr = new stack_storage_type[new_cap];
             auto ptr = reinterpret_cast<pointer>(storage_ptr);
             auto n = size();
-            this->uninitialized_move(begin(), end(), ptr);
+            ekutil::uninitialized_move(begin(), end(), ptr);
             _destruct();
             if (is_small()) {
                 _construct_heap_storage();
